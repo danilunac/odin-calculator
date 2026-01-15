@@ -5,39 +5,37 @@
         <title>Odin Calculator</title>
     </head>
 
-    <body>
+    <body style="display: flex; justify-content: center">
         <div id="calculator">
-            <div id="display">
-                1914
-            </div>
+            <div id="display">0</div>
             <table id="keys">
                 <tr id="first-row">
-                    <td><button>C</button></td>
-                    <td><button>CE</button></td>
+                    <td><button id="keyC">C</button></td>
+                    <td><button id="keyCE">CE</button></td>
                 </tr>
                 <tr id="second-row">
-                    <td><button>7</button></td>
-                    <td><button>8</button></td>
-                    <td><button>9</button></td>
-                    <td><button>/</button></td>
+                    <td><button id="key7" class="num">7</button></td>
+                    <td><button id="key8" class="num">8</button></td>
+                    <td><button id="key9" class="num">9</button></td>
+                    <td><button id="keyDivide" class="operator">/</button></td>
                 </tr>
                 <tr id="third-row">
-                    <td><button>4</button></td>
-                    <td><button>5</button></td>
-                    <td><button>6</button></td>
-                    <td><button>x</button></td>
+                    <td><button id="key4" class="num">4</button></td>
+                    <td><button id="key5" class="num">5</button></td>
+                    <td><button id="key6" class="num">6</button></td>
+                    <td><button id="keyMultiply" class="operator">*</button></td>
                 </tr>
                 <tr id="fourth-row">
-                    <td><button>1</button></td>
-                    <td><button>2</button></td>
-                    <td><button>3</button></td>
-                    <td><button>-</button></td>
+                    <td><button id="key1" class="num">1</button></td>
+                    <td><button id="key2" class="num">2</button></td>
+                    <td><button id="key3" class="num">3</button></td>
+                    <td><button id="keySubtrac" class="operator">-</button></td>
                 </tr>
                 <tr id="fifth-row">
-                    <td><button>0</button></td>
-                    <td><button>.</button></td>
-                    <td><button>=</button></td>
-                    <td><button>+</button></td>
+                    <td><button id="key0" class="num">0</button></td>
+                    <td><button id="keyDot">.</button></td>
+                    <td><button id="keyEqual">=</button></td>
+                    <td><button id="keyAdd" class="operator">+</button></td>
                 </tr>
             </table>
         </div> 
