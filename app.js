@@ -1,8 +1,8 @@
 // Variables to store the calculator operations
-let firstNumber;
-let operator;
-let secondNumber;
-let totalResult;
+let firstNumber = null;
+let operator = null;
+let secondNumber = null;
+let totalResult = null;
 
 // Array to store the digits entered by the user
 let currentNumber = [];
@@ -10,6 +10,7 @@ let currentNumber = [];
 // Booleans to know where to store the digits pressed
 let firstNumberFunction = true;
 let secondNumberFunction = false;
+let operatorFunction = true;
 
 // Reference to the display to show results
 let display = document.querySelector('#display');
@@ -49,11 +50,15 @@ function operate(firstValue, symbol, secondValue) {
 
 // Captures the digits pressed and stores them in the right operand
 function appendDigit(digit) {
+    // Adds the pressed digit to the array forming the current number
     currentNumber.push(digit);
-    console.log(currentNumber);
+    
+    // If the first number boolean is true and the second is false
+    // Stores the entered digits as the first operand
     if (firstNumberFunction && !secondNumberFunction) {
         storeFirstNumber();
     }
+    // Otherwise, stores the entered digits as the second operand
     if (secondNumberFunction && !firstNumberFunction) {
         storeSecondNumber();
     }
@@ -61,25 +66,24 @@ function appendDigit(digit) {
 
 // Stores the digits as the first operand
 function storeFirstNumber() {
+    // Converts the string of digits into a number
     firstNumber = Number(currentNumber.join(''));
-    display.textContent = firstNumber;
-    console.log(firstNumber);
-    console.log(typeof(firstNumber));
+    showDisplay(firstNumber);
 }
 
 // Stores the digits as the second operand
 function storeSecondNumber() {
+    // Converts the string of digits into a number
     secondNumber = Number(currentNumber.join(''));
-    display.textContent = secondNumber;
-    console.log(secondNumber);
+    showDisplay(secondNumber);
 }
 
 // Saves the operator chosen by the user
 function setOperator(operatorSymbol) {
-    if (operator === undefined) {
+    // If the operator flag is true, stores the pressed operator
+    if (operatorFunction) {
         operator = operatorSymbol;
-        console.log(operator);
-        display.textContent = operator;
+        showDisplay(operator);
     }
 
     // Clears the digits array to start the second operand
@@ -87,19 +91,46 @@ function setOperator(operatorSymbol) {
     // Switches the flags to store the second operand
     firstNumberFunction = false;
     secondNumberFunction = true;
+    operatorFunction = false;
+}
+
+function showDisplay(item) {
+    display.textContent = item;
 }
 
 // Calculates and shows the result of the operation
 function getResult() {
-    const result = operate(firstNumber, operator, secondNumber);
-    totalResult = result;
-    console.log(totalResult);
-    console.log(typeof(totalResult));
-    if (totalResult == null) {
-        display.textContent = 'Error';
-    } else {
-        display.textContent = result;
+    // Executes the operation only if both operands are present
+    if ((firstNumber || firstNumber === 0) && (secondNumber || secondNumber === 0)) {
+        const result = operate(firstNumber, operator, secondNumber);
+        const decimals = 2;
+        // Always rounds the result to two decimals, but doesn't show unnecessary decimals if the number is an integer
+        totalResult = Math.round(result * Math.pow(10, 2)) / Math.pow(10, 2);
     }
+
+    if (totalResult == null) {
+        showDisplay('Error');
+    } else {
+        showDisplay(totalResult);
+    }
+    
+    // Resets the array storing the digits and the operands
+    currentNumber = [];
+    firstNumber = totalResult;
+    secondNumber = null;
+}
+
+// Clears the calculator
+function clearCalculator() {
+    // Resets all the calculator variables
+    showDisplay('0');
+    firstNumber = null;
+    operator = null;
+    secondNumber = null;
+    currentNumber = [];
+    firstNumberFunction = true;
+    secondNumberFunction = false;
+    operatorFunction = true;
 }
 
 // Event: when a digit key is pressed (0–9)
@@ -112,9 +143,17 @@ document.querySelectorAll('.num').forEach(btn => {
 // Event: when an operator key is pressed
 document.querySelectorAll('.operator').forEach(symbol => {
     symbol.addEventListener('click', (event) => {
-        setOperator(event.target.textContent);
+        if (operatorFunction) {
+            setOperator(event.target.textContent);
+        } else {
+            getResult();
+            operator = event.target.textContent;
+        }
     });
 });
 
 // Event: when the equal key (=) is pressed
 document.querySelector('#keyEqual').addEventListener('click', getResult);
+
+// Event: when an clear key is pressed
+document.querySelector('#keyC').addEventListener('click', clearCalculator);
