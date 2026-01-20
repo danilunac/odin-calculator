@@ -16,6 +16,8 @@ let operatorFunction = true;
 let display = document.querySelector('#display');
 // Reference to the container with all the calculator keys
 let keysContainer = document.querySelector('#keys');
+// Reference to the dot button
+const dot = document.querySelector('#keyDot');
 
 // Basic math functions
 function add(a, b) {
@@ -52,6 +54,15 @@ function operate(firstValue, symbol, secondValue) {
 function appendDigit(digit) {
     // Adds the pressed digit to the array forming the current number
     currentNumber.push(digit);
+    if (currentNumber[0] === '.') {
+        currentNumber.pop();
+        return;
+    } 
+    
+    if (currentNumber.includes('.')) {
+        dot.classList.remove('num');
+        console.log(currentNumber);
+    }
     
     // If the first number boolean is true and the second is false
     // Stores the entered digits as the first operand
@@ -68,14 +79,24 @@ function appendDigit(digit) {
 function storeFirstNumber() {
     // Converts the string of digits into a number
     firstNumber = Number(currentNumber.join(''));
-    showDisplay(firstNumber);
+
+    if (currentNumber.join('') === '') {
+        showDisplay('0')
+    } else {
+        showDisplay(currentNumber.join(''));
+    }    
 }
 
 // Stores the digits as the second operand
 function storeSecondNumber() {
     // Converts the string of digits into a number
     secondNumber = Number(currentNumber.join(''));
-    showDisplay(secondNumber);
+
+    if (currentNumber.join('') === '') {
+        showDisplay(operator)
+    } else {
+        showDisplay(currentNumber.join(''));
+    }
 }
 
 // Saves the operator chosen by the user
@@ -92,6 +113,7 @@ function setOperator(operatorSymbol) {
     firstNumberFunction = false;
     secondNumberFunction = true;
     operatorFunction = false;
+    dot.classList.add('num');
 }
 
 function showDisplay(item) {
@@ -106,6 +128,7 @@ function getResult() {
         const decimals = 2;
         // Always rounds the result to two decimals, but doesn't show unnecessary decimals if the number is an integer
         totalResult = Math.round(result * Math.pow(10, 2)) / Math.pow(10, 2);
+        console.log(`${firstNumber} ${operator} ${secondNumber} = ${totalResult}`);
     }
 
     if (totalResult == null) {
@@ -131,12 +154,15 @@ function clearCalculator() {
     firstNumberFunction = true;
     secondNumberFunction = false;
     operatorFunction = true;
+    dot.classList.add('num');
 }
 
 // Event: when a digit key is pressed (0–9)
 document.querySelectorAll('.num').forEach(btn => {
     btn.addEventListener('click', (event) => {
-        appendDigit(event.target.textContent);
+        if (btn.classList.contains('num')) {
+            appendDigit(event.target.textContent);
+        }
     });
 });
 
