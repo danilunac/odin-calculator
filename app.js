@@ -18,6 +18,7 @@ const display = document.querySelector('#display');
 const keysContainer = document.querySelector('#keys');
 // Reference to the dot button
 const dot = document.querySelector('#keyDot');
+const keyCE = document.querySelector('#keyCE');
 
 // Basic math functions
 function add(a, b) {
@@ -50,12 +51,19 @@ function operate(firstValue, symbol, secondValue) {
     }
 }
 
+// The calculator starts with the backspace key disabled 
+keyCE.disabled = true;
+
 // Captures the digits pressed and stores them in the right operand
 function appendDigit(digit) {
     // If there was a previous error (like division by zero), reset the calculator
     if (errorState) {
         resetState();
     }
+    
+    // When a digit is entered, the backspace key is enabled to allow deleting the input
+    keyCE.disabled = false;
+
     // Adds the pressed digit to the array forming the current number
     currentNumber.push(digit);
     if (currentNumber[0] === '.') {
@@ -98,8 +106,12 @@ function storeFirstNumber() {
 
 // Stores the digits as the second operand
 function storeSecondNumber() {
-    // Converts the string of digits into a number
-    secondNumber = Number(currentNumber.join(''));
+    // Converts the entered digits to a number only if currentNumber is not empty
+    if (currentNumber.length === 0) {
+        secondNumber = null;
+    } else {
+        secondNumber = Number(currentNumber.join(''));
+    }
 
     // If there are no digits, display '0'
     if (currentNumber.join('') === '') {
@@ -108,6 +120,10 @@ function storeSecondNumber() {
         // Displays the entered digits on the screen
         showDisplay(currentNumber.join(''));
     }
+
+    // if (currentNumber[0] === undefined) {
+    //     secondNumber = null;
+    // }
 }
 
 // Saves the operator chosen by the user
@@ -120,6 +136,7 @@ function setOperator(operatorSymbol) {
     if (operatorFlag) {
         operator = operatorSymbol;
         showDisplay(operator);
+        keyCE.disabled = true;
     }
     
     // Clears the digits array to start the second operand
@@ -142,6 +159,11 @@ function getResult() {
         const decimals = 2;
         // Always rounds the result to two decimals, but doesn't show unnecessary decimals if the number is an integer
         totalResult = Math.round(result * Math.pow(10, 2)) / Math.pow(10, 2);
+        console.log(`num1: ${firstNumber}, operator: ${operator}, num2: ${secondNumber} = result: ${totalResult}`);
+
+        if (totalResult || totalResult === 0){
+            keyCE.disabled = true;
+        }
 
         // Resets the array storing the digits and the operands
         currentNumber = [];
@@ -176,6 +198,14 @@ function resetState() {
     operatorFlag = false;
     errorState = false;
     dot.classList.add('num');
+    keyCE.disabled = true;
+}
+
+// Remove the last digit entered
+function clearDigit() {
+    if (currentNumber.length > 0) {
+        currentNumber.pop();
+    }
 }
 
 // Clears the calculator completely (display and state)
@@ -232,3 +262,14 @@ document.querySelector('#keyEqual').addEventListener('click', () => {
 
 // Event: when an clear key is pressed
 document.querySelector('#keyC').addEventListener('click', clearCalculator);
+
+// Event: when an backspace button is pressed
+document.querySelector('#keyCE').addEventListener('click', () => {
+    if (!secondNumberFlag) {
+        clearDigit();
+        storeFirstNumber();
+    } else {
+        clearDigit();
+        storeSecondNumber();
+    }
+});
