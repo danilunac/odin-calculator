@@ -121,9 +121,8 @@ function storeSecondNumber() {
         showDisplay(currentNumber.join(''));
     }
 
-    // if (currentNumber[0] === undefined) {
-    //     secondNumber = null;
-    // }
+    // Avoid clearing the operator when user deletes digits from secondNumber
+    // operatorFlag = true;
 }
 
 // Saves the operator chosen by the user
@@ -136,7 +135,7 @@ function setOperator(operatorSymbol) {
     if (operatorFlag) {
         operator = operatorSymbol;
         showDisplay(operator);
-        keyCE.disabled = true;
+        // keyCE.disabled = true;
     }
     
     // Clears the digits array to start the second operand
@@ -154,7 +153,7 @@ function showDisplay(item) {
 // Calculates and shows the result of the operation
 function getResult() {
     // Executes the operation only if both operands are present
-    if ((firstNumber || firstNumber === 0) && (secondNumber || secondNumber === 0)) {
+    if ((firstNumber || firstNumber === 0) && operator && (secondNumber || secondNumber === 0)) {
         const result = operate(firstNumber, operator, secondNumber);
         const decimals = 2;
         // Always rounds the result to two decimals, but doesn't show unnecessary decimals if the number is an integer
@@ -207,6 +206,18 @@ function clearDigit() {
         currentNumber.pop();
     }
 }
+
+// Remove the operator
+// function clearOperator() {
+//     operatorFlag = true;
+//     operator = null;
+//     if (operator) {
+//         showDisplay(operator);
+//     } else {
+//         showDisplay(firstNumber);
+//     }
+//     keyCE.disabled = true;
+// }
 
 // Clears the calculator completely (display and state)
 function clearCalculator() {
@@ -273,3 +284,5 @@ document.querySelector('#keyCE').addEventListener('click', () => {
         storeSecondNumber();
     }
 });
+
+// feat: add clearOperator function to allow replacing the operator
