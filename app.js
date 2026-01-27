@@ -135,7 +135,7 @@ function setOperator(operatorSymbol) {
     if (operatorFlag) {
         operator = operatorSymbol;
         showDisplay(operator);
-        // keyCE.disabled = true;
+        keyCE.disabled = true;
     }
     
     // Clears the digits array to start the second operand
@@ -284,5 +284,3 @@ document.querySelector('#keyCE').addEventListener('click', () => {
         storeSecondNumber();
     }
 });
-
-// feat: add clearOperator function to allow replacing the operator
