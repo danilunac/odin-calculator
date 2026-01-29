@@ -21,7 +21,7 @@ html {
 body {
     display: flex;
     justify-content: center;
-    background-color: white;
+    background-color: #dcdcdc;
 }
 
 button {
