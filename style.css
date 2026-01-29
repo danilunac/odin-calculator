@@ -1,0 +1,130 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+:root {
+    --color-plastic-outer: #f5f5dc;
+    --color-plastic-inner: #1a1a1a;
+    --color-display-text: #00f5d4;
+    --color-model-label-text: #000000;
+    --color-btn-number: #f5f5dc;
+    --color-btn-clear: #ff6600;
+    --color-btn-operator: #cacaca;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+
+button {
+    width: 40px;
+    height: 25px;
+    padding: 0;
+    color: black;
+    border: solid 0.5px black;
+    border-radius: 5px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 0.9em;
+}
+
+#plastic-outer {
+    background-color: var(--color-plastic-outer);
+    padding: 20px;
+    border: solid 1px black;
+    border-radius: 5px;
+}
+
+#plastic-inner {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 15px;
+    background-color: var(--color-plastic-inner);
+    border-radius: 5px;
+    max-height: 425px;
+    max-width: 300px;
+    justify-content: space-around;
+}
+
+#display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 26px;
+    font-weight: bold;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--color-display-text);
+    background: linear-gradient(to bottom, #0a0a0a, #1c1c1c 70%, #0a0a0a);
+    height: 80px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.model-label {
+    background: linear-gradient(to bottom, #eeeeee, #bbbbbb); 
+    text-align: right;
+    padding: 10px;
+    margin: 15px 0px;
+}
+
+.label-bold {
+    font-size: 8px;
+    font-weight: bold;
+    font-family: 'Helvetica', sans-serif;
+}
+
+.label-italic {
+    font-size: 14px;
+    font-style: italic;
+    font-family: 'Dancing Script', cursive;
+}
+
+#keys {
+    background-color: var(--color-plastic-inner);
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 15px;
+}
+
+#first-row,
+#second-row,
+#third-row,
+#fourth-row {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 15px;
+}
+
+#fourth-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left {
+    display: flex;
+    gap: 15px;
+}
+
+.num {
+    background-color: var(--color-btn-number);
+    font-weight: bold;
+}
+
+#keyAC,
+#keyCE {
+    background-color: var(--color-btn-clear);
+    color: white;
+}
+
+.operator,
+#keyEqual {
+    background-color: var(--color-btn-operator);
+}

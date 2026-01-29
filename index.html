@@ -3,42 +3,53 @@
     <head>
         <meta charset="UTF-8">
         <title>Odin Calculator</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
     </head>
 
-    <body style="display: flex; justify-content: center">
-        <div id="calculator">
-            <div id="display">0</div>
-            <table id="keys">
-                <tr id="first-row">
-                    <td><button id="keyC">C</button></td>
-                    <td><button id="keyCE">CE</button></td>
-                </tr>
-                <tr id="second-row">
-                    <td><button id="key7" class="num">7</button></td>
-                    <td><button id="key8" class="num">8</button></td>
-                    <td><button id="key9" class="num">9</button></td>
-                    <td><button id="keyDivide" class="operator">/</button></td>
-                </tr>
-                <tr id="third-row">
-                    <td><button id="key4" class="num">4</button></td>
-                    <td><button id="key5" class="num">5</button></td>
-                    <td><button id="key6" class="num">6</button></td>
-                    <td><button id="keyMultiply" class="operator">*</button></td>
-                </tr>
-                <tr id="fourth-row">
-                    <td><button id="key1" class="num">1</button></td>
-                    <td><button id="key2" class="num">2</button></td>
-                    <td><button id="key3" class="num">3</button></td>
-                    <td><button id="keySubtrac" class="operator">-</button></td>
-                </tr>
-                <tr id="fifth-row">
-                    <td><button id="key0" class="num">0</button></td>
-                    <td><button id="keyDot" class="num">.</button></td>
-                    <td><button id="keyEqual">=</button></td>
-                    <td><button id="keyAdd" class="operator">+</button></td>
-                </tr>
-            </table>
-        </div> 
+    <body>
+        <div id="plastic-outer">
+            <div id="plastic-inner">
+                <div id="display">0</div>
+                <div class="model-label">
+                    <span class="label-bold">The Odin Project</span>
+                    <span class="label-italic">calculator</span>
+                </div>
+                <div id="keys">
+                    <div id="first-row">
+                        <div><button class="num">7</button></div>
+                        <div><button class="num">8</button></div>
+                        <div><button class="num">9</button></div>
+                        <div><button id="keyAC">AC</button></div>
+                        <div><button id="keyCE">CE</button></div>
+                    </div>
+                    <div id="second-row">
+                        <div><button class="num">4</button></div>
+                        <div><button class="num">5</button></div>
+                        <div><button class="num">6</button></div>
+                        <div><button class="operator">*</button></div>
+                        <div><button class="operator">/</button></div>
+                    </div>
+                    <div id="third-row">
+                        <div><button class="num">1</button></div>
+                        <div><button class="num">2</button></div>
+                        <div><button class="num">3</button></div>
+                        <div><button class="operator">+</button></div>
+                        <div><button class="operator">-</button></div>
+                    </div>
+                    <div id="fourth-row">
+                        <div class="left">
+                            <button class="num">0</button>
+                            <button id="keyDot" class="num">.</button>
+                        </div>
+                        <div class="right">
+                            <button id="keyEqual">=</button>
+                        </div>                        
+                    </div>
+                </div>
+            </div> 
+        </div>
 
         <script src="app.js"></script>
     </body>

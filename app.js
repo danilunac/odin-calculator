@@ -53,6 +53,7 @@ function operate(firstValue, symbol, secondValue) {
 
 // The calculator starts with the backspace key disabled 
 keyCE.disabled = true;
+// keyCE.style.display = 'none';
 
 // Captures the digits pressed and stores them in the right operand
 function appendDigit(digit) {
@@ -63,6 +64,7 @@ function appendDigit(digit) {
     
     // When a digit is entered, the backspace key is enabled to allow deleting the input
     keyCE.disabled = false;
+    // keyCE.style.display = 'inline-block';
 
     // Adds the pressed digit to the array forming the current number
     currentNumber.push(digit);
@@ -204,6 +206,7 @@ function resetState() {
 function clearDigit() {
     if (currentNumber.length > 0) {
         currentNumber.pop();
+        dot.classList.add('num');
     }
 }
 
@@ -272,7 +275,7 @@ document.querySelector('#keyEqual').addEventListener('click', () => {
 });
 
 // Event: when an clear key is pressed
-document.querySelector('#keyC').addEventListener('click', clearCalculator);
+document.querySelector('#keyAC').addEventListener('click', clearCalculator);
 
 // Event: when an backspace button is pressed
 document.querySelector('#keyCE').addEventListener('click', () => {
