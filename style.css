@@ -35,6 +35,10 @@ button {
     font-size: 0.9em;
 }
 
+button:active {
+  transform: translateY(2px);
+}
+
 #plastic-outer {
     background-color: var(--color-plastic-outer);
     padding: 20px;
